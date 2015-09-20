@@ -1,0 +1,103 @@
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/map"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cl.zecovery.android.fldsmdfr.activity.NodeRegisterMapsActivity"
+    android:name="com.google.android.gms.maps.SupportMapFragment" >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@color/grey_alpha"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textViewNodeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/node_name"
+            android:paddingTop="4dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:textColor="@color/grey_300"/>
+
+        <TextView
+            android:id="@+id/textViewLat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lat_short"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:textColor="@color/grey_300"/>
+
+        <TextView
+            android:id="@+id/textViewLng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lng_short"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="4dp"
+            android:textColor="@color/grey_300"/>
+
+        <Button
+            android:id="@+id/btnViewNode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:textColor="@color/grey_300"
+            android:background="@color/alpha"
+            android:text="@string/btn_view_node" />
+
+        <Button
+            android:id="@+id/btnSaveNode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:textColor="@color/grey_300"
+            android:background="@color/alpha"
+            android:text="@string/btn_save_node" />
+
+        <Button
+            android:id="@+id/btnViewModeSatellite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:textColor="@color/grey_300"
+            android:background="@color/alpha"
+            android:text="@string/btn_view_mode_satelite" />
+
+        <Button
+            android:id="@+id/btnViewModeTerrain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:textColor="@color/grey_300"
+            android:background="@color/alpha"
+            android:text="@string/btn_view_mode_terrain" />
+
+        <Button
+            android:id="@+id/btnViewModeNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:textColor="@color/grey_300"
+            android:background="@color/alpha"
+            android:text="@string/btn_view_mode_normal" />
+
+    </LinearLayout>
+
+</fragment>
+
+
+
+
+
+
+

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+        <string-array name="mapType">
+            <item name="normal_map">Normal</item>
+            <item name="satellite_map">Satelital</item>
+            <item name="terrain_map">Relieve</item>
+        </string-array>
+        <string-array name="mapTypeValues">
+            <item name="normal_map">1</item>
+            <item name="satellite_map">2</item>
+            <item name="terrain_map">3</item>
+        </string-array>
+
+</resources>

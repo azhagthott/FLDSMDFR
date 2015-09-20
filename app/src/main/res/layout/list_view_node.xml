@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre punto"
+            android:id="@+id/textViewPointName"
+            android:textColor="@color/primary_material_dark"
+            android:singleLine="false" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary_material_dark"
+            android:text="Latitud"
+            android:id="@+id/textViewPointLatitude"
+            android:singleLine="false" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary_material_dark"
+            android:text="Longitud"
+            android:id="@+id/textViewPointLongitude"
+            android:singleLine="false" />
+
+</LinearLayout>
