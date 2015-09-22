@@ -7,10 +7,11 @@ import java.util.List;
  */
 public interface NodeCrud {
 
+    int getNodeCount();
     void addNode(Node node);
     Node getNode(int nodeId);
     List<Node> getAllNodes();
-    int getNodeCount(int result);
     int updateNode(Node node);
     void deleteNode(Node node);
+    boolean findNode(int nodeId);
 }

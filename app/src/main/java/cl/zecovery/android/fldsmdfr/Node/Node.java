@@ -1,5 +1,7 @@
 package cl.zecovery.android.fldsmdfr.Node;
 
+import java.util.UUID;
+
 /**
  * Created by fran on 13-09-15.
  */

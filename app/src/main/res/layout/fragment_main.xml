@@ -14,31 +14,66 @@
         android:text="Listar nodos"
         android:id="@+id/btnNodeList" />
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnNodeList"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/linearLayout">
+
+        <TextView
+            android:id="@+id/textViewLblNodeCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="4dp"
+            android:layout_marginLeft="4dp"
+            android:text="@string/node_count" />
+
+        <TextView
+            android:id="@+id/textViewNodeCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/node_count_x" />
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listViewNode"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_below="@+id/linearLayout"
+        android:layout_above="@+id/btnNodeRegister" />
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Registrar Nodo"
         android:id="@+id/btnNodeRegister"
         android:layout_above="@+id/btnNodeReader"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignLeft="@+id/btnNodeReader"
+        android:layout_alignStart="@+id/btnNodeReader" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Leer nodo (QR)"
         android:id="@+id/btnNodeReader"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/btnSynchronize"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <ListView
-        android:layout_width="wrap_content"
+    <Button
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/listViewNode"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/btnNodeRegister"
-        android:layout_below="@+id/btnNodeList" />
+        android:text="@string/synchronize"
+        android:id="@+id/btnSynchronize"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/listViewNode"
+        android:layout_alignEnd="@+id/listViewNode" />
 
 </RelativeLayout>

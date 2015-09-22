@@ -66,6 +66,24 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cl.zecovery.android.fldsmdfr.activity.MainActivity" />
         </activity>
+        <activity
+            android:name=".NodeDetail"
+            android:label="@string/title_activity_node_detail"
+            android:parentActivityName=".activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cl.zecovery.android.fldsmdfr.activity.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activity.NodeDetail"
+            android:label="@string/title_activity_node_detail"
+            android:parentActivityName=".activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cl.zecovery.android.fldsmdfr.activity.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

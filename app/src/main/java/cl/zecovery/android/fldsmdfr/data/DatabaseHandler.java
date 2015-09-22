@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +55,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements NodeCrud{
         try {
             ContentValues values = new ContentValues();
 
-            values.put(Constants.KEY_ID, node.getId());
+            values.put(Constants.KEY_ID, String.valueOf(node.getId()));
             values.put(Constants.KEY_NAME, node.getName());
             values.put(Constants.KEY_LAT, node.getLat());
             values.put(Constants.KEY_LNG, node.getLng());
@@ -84,7 +83,6 @@ public class DatabaseHandler extends SQLiteOpenHelper implements NodeCrud{
                 Constants.KEY_ID + "=?",
 
                 new String[] {String.valueOf(nodeId)},
-
                 null,
                 null,
                 null
@@ -112,28 +110,32 @@ public class DatabaseHandler extends SQLiteOpenHelper implements NodeCrud{
         Cursor cursor = db.rawQuery(selectAllQuery, null);
 
         if(cursor.moveToFirst()){
-            do {Node node = new Node();
-            node.setId(Integer.parseInt(cursor.getString(0)));
-            node.setName(cursor.getString(1));
-            node.setLat(Double.parseDouble(cursor.getString(2)));
-            node.setLng(Double.parseDouble(cursor.getString(3)));
-            nodeList.add(node);
+            do {
+                Node node = new Node();
+                node.setId(Integer.parseInt(cursor.getString(0)));
+                node.setName(cursor.getString(1));
+                node.setLat(Double.parseDouble(cursor.getString(2)));
+                node.setLng(Double.parseDouble(cursor.getString(3)));
+                nodeList.add(node);
             }
             while (cursor.moveToNext());
         }
+
+        cursor.close();
         return nodeList;
     }
 
     @Override
-    public int getNodeCount(int result) {
+    public int getNodeCount() {
 
         String countQuery = Constants.SELECT_ALL;
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
+        int i = cursor.getCount();
         cursor.close();
 
-        return cursor.getCount();
+        return i;
     }
 
 
@@ -162,5 +164,20 @@ public class DatabaseHandler extends SQLiteOpenHelper implements NodeCrud{
            String.valueOf(node.getId())
         });
         db.close();
+    }
+
+    @Override
+    public boolean findNode(int nodeId) {
+
+        String whereQuery = Constants.SELECT_ALL_WHERE_NODEID;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(whereQuery, new String[]{String.valueOf(nodeId)});
+
+        if(cursor.getCount()==1){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

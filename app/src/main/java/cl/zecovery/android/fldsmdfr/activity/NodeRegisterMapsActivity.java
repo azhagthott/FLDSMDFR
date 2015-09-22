@@ -29,11 +29,18 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONObject;
 
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.Random;
+import java.util.UUID;
+
 import cl.zecovery.android.fldsmdfr.Node.Node;
 import cl.zecovery.android.fldsmdfr.R;
 import cl.zecovery.android.fldsmdfr.Utils.Constants;
 import cl.zecovery.android.fldsmdfr.com.CustomJsonRequest;
 import cl.zecovery.android.fldsmdfr.com.NodeDataRequest;
+import cl.zecovery.android.fldsmdfr.data.DatabaseHandler;
 
 public class NodeRegisterMapsActivity
         extends AppCompatActivity
@@ -60,6 +67,8 @@ public class NodeRegisterMapsActivity
     private Button btnSaveNode;
     private Button btnViewNode;
 
+    private int nodeCount;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,9 +80,7 @@ public class NodeRegisterMapsActivity
         mapFragment.getMapAsync(this);
 
         node = new Node();
-
         nodeDataRequest = new NodeDataRequest();
-
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
         Criteria criteria = new Criteria();
@@ -105,6 +112,9 @@ public class NodeRegisterMapsActivity
         mMap.setMyLocationEnabled(true);
         mLocation = new LatLng(node.getLat(), node.getLng());
 
+        final DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+        nodeCount = db.getNodeCount();
+
         // UI Config
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
@@ -124,8 +134,16 @@ public class NodeRegisterMapsActivity
                 new LatLng(node.getLat(), node.getLng()), 14.0f));
 
         mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+
             @Override
             public void onMapLongClick(LatLng latLng) {
+
+                Date date = new Date();
+                int unique = date.hashCode();
+
+                node = new Node(unique, "Point" + unique , latLng.latitude, latLng.longitude);
+                db.addNode(node);
+                db.close();
 
                 textViewLat.setText("LAT: " + String.valueOf(latLng.latitude));
                 textViewLng.setText("LNG: " + String.valueOf(latLng.longitude));

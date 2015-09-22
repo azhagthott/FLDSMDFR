@@ -39,6 +39,7 @@ public class NodeDataRequest {
     public void getLocalDataForList(NodeAdapter adapter, Context context){
         DatabaseHandler db = new DatabaseHandler(context);
         adapter.addAll(db.getAllNodes());
+        db.close();
     }
 
     public void getLocalDataForMap(Context context, GoogleMap mMap){
@@ -55,15 +56,12 @@ public class NodeDataRequest {
                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
                                 .title(node.getName())
                 );
-
-                Log.d(LOG_TAG, "node:  " + node.getName());
             }
+        db.close();
 
         }catch (Exception e){
             Log.d(LOG_TAG, "Exception :  " + e);
         }
-
-
     }
 
     public void getDataForListView(NodeAdapter adapter, Context context) {
@@ -100,14 +98,16 @@ public class NodeDataRequest {
                     node.setLat(lat);
                     node.setLng(lng);
 
-                    db.addNode(new Node(id, name, lat, lng));
-
+                    if(!db.findNode(id)){
+                        db.addNode(new Node(id, name, lat, lng));
+                    }
 
                 }else {
                     continue;
                 }
                 adapter.addAll(node);
             }
+            db.close();
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -145,6 +145,7 @@ public class NodeDataRequest {
 
                     mMap.addMarker(new MarkerOptions()
                                     .position(new LatLng(node.getLat(), node.getLng()))
+                                    .flat(true)
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
                                     .title(node.getName())
                     );

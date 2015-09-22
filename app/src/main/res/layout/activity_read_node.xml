@@ -16,39 +16,68 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
+        <TextView
+            android:id="@+id/textViewQrResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/qr_reading"
+            android:layout_marginBottom="4dp"/>
+
+
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp">
+            android:layout_marginBottom="4dp">
 
-            <TextView
-                android:id="@+id/textViewQrResult"
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/qr_reading"
-                android:layout_marginBottom="4dp"/>
+                android:layout_marginBottom="4dp">
 
-            <TextView
-                android:id="@+id/textViewQrLatitude"
+                <TextView
+                    android:id="@+id/textViewQrLatitude"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lat_long"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/textViewLblQrLatitude"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/qr_result_lat"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/qr_result_lat"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="12dp">
 
-            <TextView
-                android:id="@+id/textViewQrLongitude"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/qr_result_lng"
-                android:layout_marginBottom="4dp" />
+                <TextView
+                    android:id="@+id/textViewLblQrLongitude"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lng_long"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/textViewQrLongitude"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/qr_result_lng" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
         <me.dm7.barcodescanner.zxing.ZXingScannerView
             android:id="@+id/qrScanner"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
