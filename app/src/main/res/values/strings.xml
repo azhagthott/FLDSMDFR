@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">FLDSMDFR</string>
+
     <string name="action_settings">Config</string>
-    <string name="action_map">Mapa</string>
+    <string name="action_map">Map</string>
+    <string name="action_admin">Admin</string>
+
     <string name="title_activity_maps">Mapa</string>
     <string name="title_activity_setting">SettingActivity</string>
 
@@ -35,6 +38,12 @@
     <string name="pref_map_type">TIPO DE MAPA</string>
     <string name="pref_map_type_summary">Seleccione el tipo de mapa por defecto</string>
     <string name="title_activity_settings">Settings</string>
+
+
+    <!-- DB MANAGER -->
+    <string name="db_manager_delete_all_data">Borrar todos los nodos</string>
+    <string name="db_manager_create_database">Crear DB (destruye la existente)</string>
+
 
     <!-- Strings related to Settings -->
 
@@ -94,6 +103,7 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="title_activity_node_detail">Datos del nodo:</string>
+    <string name="title_activity_admin">Admin</string>
 
 
 </resources>

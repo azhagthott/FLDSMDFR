@@ -17,6 +17,20 @@ public class CustomJsonRequest extends JsonObjectRequest{
 
     public Request.Priority mPriority;
 
+
+    /**
+     * @param method:   HTTP Method:
+     *              0 = GET;
+     *              1 = POST;
+     *              2 = PUT;
+     *              3 = DELETE
+     *
+     * @param url: use Constant.VAR:
+     *           Constant.URL_GET_POINTS
+     * @param jsonRequest: null
+     * @param listener new Response.Listener<JSONObject>() {}
+     * @param errorListener new Response.ErrorListener() {}
+     */
     public CustomJsonRequest(int method,
                              String url,
                              JSONObject jsonRequest,
@@ -40,4 +54,8 @@ public class CustomJsonRequest extends JsonObjectRequest{
         headers.put("Accept", "application/json");
         return headers;
     }
+
+
+
 }
+

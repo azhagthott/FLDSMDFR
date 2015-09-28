@@ -16,6 +16,7 @@ import org.json.JSONObject;
 
 import cl.zecovery.android.fldsmdfr.Node.Node;
 import cl.zecovery.android.fldsmdfr.Node.NodeAdapter;
+import cl.zecovery.android.fldsmdfr.Utils.Constants;
 import cl.zecovery.android.fldsmdfr.data.DatabaseHandler;
 
 /**
@@ -27,6 +28,12 @@ public class NodeDataRequest {
 
     private JSONObject jsonObject;
     private Context mContext;
+
+    private JSONObject contextElement;
+    private JSONObject element;
+    private JSONArray attributes;
+
+
 
     public NodeDataRequest() {
 
@@ -77,31 +84,44 @@ public class NodeDataRequest {
 
                 Node node = new Node();
 
-                JSONObject contextElement = contextResponses.getJSONObject(i);
-                JSONObject element = contextElement.getJSONObject("contextElement");
-                JSONArray attributes = element.getJSONArray("attributes");
+                contextElement = contextResponses.getJSONObject(i);
+                element = contextElement.getJSONObject("contextElement");
+                attributes = element.getJSONArray("attributes");
 
-                if (attributes.length() == 4) {
+                Log.d(LOG_TAG, "attributes:  " + attributes);
+                Log.d(LOG_TAG, "ATTRIBUTE_LENGHT:  " +  Constants.ATTRIBUTE_LENGHT);
+
+                if (attributes.length() == Constants.ATTRIBUTE_LENGHT) {
 
                     JSONObject pointId = attributes.getJSONObject(0);
                     JSONObject pointName = attributes.getJSONObject(1);
                     JSONObject pointLatitude = attributes.getJSONObject(2);
                     JSONObject pointLongitude = attributes.getJSONObject(3);
+                    JSONObject pointTemperature = attributes.getJSONObject(4);
 
                     int id = pointId.getInt("value");
                     String name = pointName.getString("value");
                     double lat = pointLatitude.getDouble("value");
                     double lng = pointLongitude.getDouble("value");
+                    double temperature = pointTemperature.getDouble("value");
+
+
+                    Log.d(LOG_TAG, "id: " + id);
+                    Log.d(LOG_TAG, "name: " + name);
+                    Log.d(LOG_TAG, "lat: " + lat);
+                    Log.d(LOG_TAG, "lng: " + lng);
+                    Log.d(LOG_TAG, "temperature: " + temperature);
+
 
                     node.setId(id);
                     node.setName(name);
                     node.setLat(lat);
                     node.setLng(lng);
+                    node.setTemperature(temperature);
 
                     if(!db.findNode(id)){
-                        db.addNode(new Node(id, name, lat, lng));
+                        db.addNode(new Node(id, name, lat, lng, temperature));
                     }
-
                 }else {
                     continue;
                 }
@@ -122,26 +142,30 @@ public class NodeDataRequest {
 
                 Node node = new Node();
 
-                JSONObject contextElement = contextResponses.getJSONObject(i);
-                JSONObject element = contextElement.getJSONObject("contextElement");
-                JSONArray attributes = element.getJSONArray("attributes");
+                contextElement = contextResponses.getJSONObject(i);
+                element = contextElement.getJSONObject("contextElement");
+                attributes = element.getJSONArray("attributes");
 
-                if (attributes.length() == 4) {
+                if (attributes.length() == Constants.ATTRIBUTE_LENGHT) {
 
                     JSONObject pointId = attributes.getJSONObject(0);
                     JSONObject pointName = attributes.getJSONObject(1);
                     JSONObject pointLatitude = attributes.getJSONObject(2);
                     JSONObject pointLongitude = attributes.getJSONObject(3);
+                    JSONObject pointTemperature = attributes.getJSONObject(4);
 
                     int id = pointId.getInt("value");
                     String name = pointName.getString("value");
                     double lat = pointLatitude.getDouble("value");
                     double lng = pointLongitude.getDouble("value");
+                    double temperature = pointTemperature.getDouble("value");
 
+                    // Crea el Nodo
                     node.setId(id);
                     node.setName(name);
                     node.setLat(lat);
                     node.setLng(lng);
+                    node.setTemperature(temperature);
 
                     mMap.addMarker(new MarkerOptions()
                                     .position(new LatLng(node.getLat(), node.getLng()))

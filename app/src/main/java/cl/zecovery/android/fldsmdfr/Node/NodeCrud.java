@@ -8,10 +8,18 @@ import java.util.List;
 public interface NodeCrud {
 
     int getNodeCount();
+
     void addNode(Node node);
+
     Node getNode(int nodeId);
+
     List<Node> getAllNodes();
+
     int updateNode(Node node);
+
     void deleteNode(Node node);
+
+    void deleteAllNode();
+
     boolean findNode(int nodeId);
 }

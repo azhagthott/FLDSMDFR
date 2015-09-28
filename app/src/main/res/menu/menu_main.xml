@@ -4,15 +4,22 @@
     tools:context=".MainActivity">
 
     <item
+        android:id="@+id/action_map"
+        android:icon="@drawable/ic_action_location_dark_2"
+        android:title="@string/action_map"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/action_settings"
         android:title="@string/action_settings"
         android:orderInCategory="100"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_map"
-        android:icon="@drawable/ic_action_location_dark_2"
-        android:title="@string/action_map"
+        android:id="@+id/action_admin"
+        android:title="@string/action_admin"
         android:orderInCategory="100"
-        app:showAsAction="always" />
+        app:showAsAction="never" />
+
 </menu>

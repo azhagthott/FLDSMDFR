@@ -125,7 +125,6 @@ public class MainActivityFragment extends Fragment {
             }
         });
 
-
         btnSynchronize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -154,7 +153,6 @@ public class MainActivityFragment extends Fragment {
                             Toast.LENGTH_LONG);
 
                 }
-
             }
         });
 

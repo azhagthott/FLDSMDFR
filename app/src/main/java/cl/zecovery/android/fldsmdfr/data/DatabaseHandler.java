@@ -34,8 +34,11 @@ public class DatabaseHandler extends SQLiteOpenHelper implements NodeCrud{
                         + Constants.KEY_ID + " INTEGER PRIMARY KEY,"
                         + Constants.KEY_NAME + " TEXT,"
                         + Constants.KEY_LAT + " TEXT,"
-                        + Constants.KEY_LNG + " TEXT"
+                        + Constants.KEY_LNG + " TEXT,"
+                        + Constants.KEY_TEMPERATURE + " TEXT"
                         + ");";
+
+        Log.d(LOG_TAG, "data base name: " + CREATE_TABLE_NODES);
 
         db.execSQL(CREATE_TABLE_NODES);
     }
@@ -59,6 +62,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements NodeCrud{
             values.put(Constants.KEY_NAME, node.getName());
             values.put(Constants.KEY_LAT, node.getLat());
             values.put(Constants.KEY_LNG, node.getLng());
+            values.put(Constants.KEY_TEMPERATURE, node.getTemperature());
 
             db.insert(Constants.TABLE_NODES, null, values);
             db.close();
@@ -78,7 +82,8 @@ public class DatabaseHandler extends SQLiteOpenHelper implements NodeCrud{
                 new String[] {
                         Constants.KEY_NAME,
                         Constants.KEY_LAT,
-                        Constants.KEY_LNG
+                        Constants.KEY_LNG,
+                        Constants.KEY_TEMPERATURE,
                     },
                 Constants.KEY_ID + "=?",
 
@@ -95,7 +100,8 @@ public class DatabaseHandler extends SQLiteOpenHelper implements NodeCrud{
                 cursor.getInt(0),
                 cursor.getString(1),
                 cursor.getDouble(2),
-                cursor.getDouble(3)
+                cursor.getDouble(3),
+                cursor.getDouble(4)
         );
     }
 
@@ -116,6 +122,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements NodeCrud{
                 node.setName(cursor.getString(1));
                 node.setLat(Double.parseDouble(cursor.getString(2)));
                 node.setLng(Double.parseDouble(cursor.getString(3)));
+                node.setTemperature(Double.parseDouble(cursor.getString(4)));
                 nodeList.add(node);
             }
             while (cursor.moveToNext());
@@ -124,6 +131,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements NodeCrud{
         cursor.close();
         return nodeList;
     }
+
 
     @Override
     public int getNodeCount() {
@@ -148,6 +156,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements NodeCrud{
         values.put(Constants.KEY_NAME, node.getName());
         values.put(Constants.KEY_LAT, node.getLat());
         values.put(Constants.KEY_LNG, node.getLng());
+        values.put(Constants.KEY_TEMPERATURE, node.getTemperature());
 
         int i = db.update(Constants.TABLE_NODES, values, Constants.KEY_ID + "=?", new String[]{
                 String.valueOf(node.getId())
@@ -167,13 +176,19 @@ public class DatabaseHandler extends SQLiteOpenHelper implements NodeCrud{
     }
 
     @Override
+    public void deleteAllNode() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String deleteAll = Constants.DELETE_ALL;
+        db.execSQL(deleteAll);
+        db.close();
+    }
+
+    @Override
     public boolean findNode(int nodeId) {
 
         String whereQuery = Constants.SELECT_ALL_WHERE_NODEID;
-
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(whereQuery, new String[]{String.valueOf(nodeId)});
-
         if(cursor.getCount()==1){
             return true;
         }else{

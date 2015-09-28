@@ -11,6 +11,8 @@ public class Node{
     public String name;
     public double lat;
     public double lng;
+    public double temperature;
+
 
     public Node() {
     }
@@ -30,6 +32,14 @@ public class Node{
         this.name = name;
         this.lat = lat;
         this.lng = lng;
+    }
+
+    public Node(int id, String name, double lat, double lng, double temperature) {
+        this.id = id;
+        this.name = name;
+        this.lat = lat;
+        this.lng = lng;
+        this.temperature = temperature;
     }
 
     public int getId() {
@@ -64,5 +74,11 @@ public class Node{
         this.lng = lng;
     }
 
+    public double getTemperature() {
+        return temperature;
+    }
 
+    public void setTemperature(double temperature) {
+        this.temperature = temperature;
+    }
 }

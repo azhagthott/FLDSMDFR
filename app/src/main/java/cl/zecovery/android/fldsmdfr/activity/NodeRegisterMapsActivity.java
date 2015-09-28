@@ -27,11 +27,13 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Random;
 import java.util.UUID;
 
@@ -40,6 +42,7 @@ import cl.zecovery.android.fldsmdfr.R;
 import cl.zecovery.android.fldsmdfr.Utils.Constants;
 import cl.zecovery.android.fldsmdfr.com.CustomJsonRequest;
 import cl.zecovery.android.fldsmdfr.com.NodeDataRequest;
+import cl.zecovery.android.fldsmdfr.com.NodeDataSend;
 import cl.zecovery.android.fldsmdfr.data.DatabaseHandler;
 
 public class NodeRegisterMapsActivity
@@ -142,8 +145,33 @@ public class NodeRegisterMapsActivity
                 int unique = date.hashCode();
 
                 node = new Node(unique, "Point" + unique , latLng.latitude, latLng.longitude);
-                db.addNode(node);
+                //db.addNode(node);
                 db.close();
+
+                NodeDataSend nodeDataSend = new NodeDataSend();
+                nodeDataSend.makePostRequest(node);
+
+                JSONObject jsonObject=null;
+
+                Log.d(LOG_TAG,"JSONObject::: " + jsonObject);
+
+                if (nodeDataRequest.isNetworkAvailable(getApplicationContext())){
+                    request = new CustomJsonRequest(
+                            Request.Method.POST,
+                            Constants.URL_POST_ONE_POINT + node.getId(),
+                            jsonObject,
+                            new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject jsonObject) {}
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d(LOG_TAG, "VolleyError: " + error);
+                        }
+                    });
+                    request.setPriority(Request.Priority.HIGH);
+                    Volley.newRequestQueue(getApplicationContext()).add(request);
+                }
 
                 textViewLat.setText("LAT: " + String.valueOf(latLng.latitude));
                 textViewLng.setText("LNG: " + String.valueOf(latLng.longitude));

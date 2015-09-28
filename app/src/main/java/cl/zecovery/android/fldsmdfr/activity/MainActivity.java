@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import cl.zecovery.android.fldsmdfr.R;
+import cl.zecovery.android.fldsmdfr.data.DBManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,6 +41,13 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.action_settings) {
             Intent i = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(i);
+            return true;
+        }
+
+
+        if (id == R.id.action_admin) {
+            Intent i = new Intent(MainActivity.this, DBManager.class);
             startActivity(i);
             return true;
         }
